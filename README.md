@@ -2,13 +2,17 @@
 🧩 WindowsGSM plugin that provides Memories of Mars Dedicated server support!
 
 
-# Basic Installation: 
+# WindowsGSM Installation: 
 1. Download  WindowsGSM https://windowsgsm.com/ 
-2. Download this Plugin as .zip container and don't unpack it.
-3. Create a Folder at a Location you wan't all Server to be Installed and Run.
+2. Create a Folder at a Location you wan't all Server to be Installed and Run.
 4. Drag WindowsGSM.Exe into previoulsy created folder and execute it.
-5. Press on the Puzzle Icon in the left bottom side and install this plugin by navigating to it and select the Zip File.
-6. Wait a couple of seconds then close the plugin menu and install the game server.
+
+# Plugin Installation:
+1. Download [latest](https://github.com/ohmcodes/WindowsGSM.MemoriesOfMars/releases/latest) release
+2. Extract then Move **MemoriesOfMars.cs** folder to **plugins** folder
+3. OR Press on the Puzzle Icon in the left bottom side and install this plugin by navigating to it and select the Zip File.
+4. Click **[RELOAD PLUGINS]** button or restart WindowsGSM
+5. Navigate "Servers" and Click "Install Game Server" and find "Memories of Mars Dedicated Server [MemoriesOfMars.cs]
 
 ### Official Documentation
 🗃️ https://505games.com/wp-content/uploads/Handbook-Dedicated-Servers-Memories-of-Mars-V1.5.pdf
@@ -27,4 +31,5 @@
 #### More Configurations
 - If you set "DailyRestartUTCHour" make sure to turn on "Auto Start" so whenever the server shuts down it will restart.
 
-
+# License
+This project is licensed under the MIT License - see the <a href="https://github.com/ohmcodes/WindowsGSM.MemoriesOfMars/blob/main/LICENSE">LICENSE.md</a> file for details
