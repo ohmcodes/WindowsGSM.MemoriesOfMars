@@ -20,7 +20,7 @@ namespace WindowsGSM.Plugins
             name = "WindowsGSM.MemoriesOfMars", // WindowsGSM.XXXX
             author = "ohmcodes",
             description = "WindowsGSM plugin for supporting Memories of Mars Dedicated Server",
-            version = "1.0",
+            version = "1.2",
             url = "https://github.com/ohmcodes/WindowsGSM.MemoriesOfMars", // Github repository link (Best practice)
             color = "#f5bd1f" // Color Hex
         };
@@ -118,19 +118,12 @@ namespace WindowsGSM.Plugins
         // - Stop server function
         public async Task Stop(Process p)
         {
-            await Task.Run(() =>
-            {
-                if (p.StartInfo.RedirectStandardInput)
-                {
-                    // Send "stop" command to StandardInput stream if EmbedConsole is on
-                    p.StandardInput.WriteLine("stop");
-                }
-                else
-                {
-                    // Send "stop" command to game server process MainWindow
-                    ServerConsole.SendMessageToMainWindow(p.MainWindowHandle, "stop");
-                }
-            });
+			await Task.Run(() =>
+			{
+				 Functions.ServerConsole.SetMainWindow(p.MainWindowHandle);
+				 Functions.ServerConsole.SendWaitToMainWindow("^c");
+			});
+			await Task.Delay(20000);
         }
 
         // - Update server function
