@@ -28,6 +28,20 @@
 - Find "DedicatedServerConfig.cfg" for server settings
 - Find "CustomRuleSet.cfg" for game settings
 
+#### NOTE
+- This plugin automatically overrides command-line parameters when you start the server so no need to set extra param for this game server
+- All overrides config located on WindowsGSM.cfg
+- No need to change maxplayers on DedicatedServerConfig.cfg
+- No need to add Port and SteamQueryPort on DedicatedServerConfig.cfg
+```
+-MULTIHOME= {automatically gets the local ip of the current machine. this can be change on Server IP Address}
+-PublicIP= {automatically gets the public ip of your ISP}
+-port= {can be change on Server Port}
+-beaconport= {can be change on Server Query Port}
+-maxplayers= {can be change on Server Maxplayers}
+```
+
+
 #### More Configurations
 - If you set "DailyRestartUTCHour" make sure to turn on "Auto Start" so whenever the server shuts down it will restart.
 

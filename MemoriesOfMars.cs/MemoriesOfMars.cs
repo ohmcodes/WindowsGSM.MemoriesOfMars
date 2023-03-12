@@ -52,8 +52,27 @@ namespace WindowsGSM.Plugins
 
         // - Create a default cfg for the game server after installation
         public async void CreateServerCFG()
-        {}
+        {
+            // create new config
+            var sb = new StringBuilder();
+            sb.AppendLine("{");
+            sb.AppendLine($"\t\"ServerName\": \"{_serverData.ServerName}\",");
+            sb.AppendLine($"\t\"ServerPassword\": \"\",");
+            sb.AppendLine($"\t\"ServerID\": \"mom_dedicated_01\",");
+            sb.AppendLine($"\t\"MapName\": \"{_serverData.ServerMap}\",");
+            sb.AppendLine($"\t\"MaxPlayers\": {_serverData.ServerMaxPlayer},");
+            sb.AppendLine($"\t\"EnablePVP\": false,");
+            sb.AppendLine($"\t\"EnablePVPAreas\": true,");
+            sb.AppendLine($"\t\"EnableEAC\": true,");
+            sb.AppendLine($"\t\"DailyRestartUTCHour\": \"12\",");
+            sb.AppendLine($"\t\"Headless\": false,");
+            sb.AppendLine($"\t\"UserWhitelist\": \"\",");
+            sb.AppendLine($"\t\"UserBlacklist\": \"\",");
+            sb.AppendLine($"\t\"Admins\": \"\"");
+            sb.AppendLine("}");
 
+            File.WriteAllText(ServerPath.GetServersServerFiles(_serverData.ServerID, "DedicatedServerConfig.cfg"), sb.ToString());
+        }
 
         // - Start server function, return its Process to WindowsGSM
         public async Task<Process> Start()
@@ -66,8 +85,16 @@ namespace WindowsGSM.Plugins
                 return null;
             }
 
+            //Get WAN IP from net
+            string externalIpString = new WebClient().DownloadString("http://ifconfig.me/ip").Replace("\\r\\n", "").Replace("\\n", "").Trim();
+            var externalIp = IPAddress.Parse(externalIpString);
+
             // Prepare start parameter
-            var param = new StringBuilder($"{_serverData.ServerParam}");
+            var additional_param = new StringBuilder($"{_serverData.ServerParam}");
+
+            string param = $"-MULTIHOME=\"{_serverData.ServerIP}\" -PublicIP=\"{externalIp}\" -port={_serverData.ServerPort} -beaconport={_serverData.ServerQueryPort} -maxplayers={_serverData.ServerMaxPlayer} ";
+            
+            param += additional_param;
 
             // Prepare Process
             var p = new Process
